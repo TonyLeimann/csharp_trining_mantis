@@ -20,18 +20,27 @@ namespace mantis_tests
             }
            
         }
-
+        
         [Test]
         public void TestAccountRegistration()
         {
+
             AccountData account = new AccountData()
             {
-                Name = "testuser_",
+                Name = "testuser_95",
                 Password = "password",
-                Email ="testuser_@localhost.localdomain"
-                
+                Email = "testuser_95@localhost.localdomain"
+
             };
+
+            List<AccountData> accounts = app.Admin.GetAllAccounts();
+            AccountData existingAccount =  accounts.Find(name => name.Name == account.Name);
+            if(existingAccount != null)
+            {
+                app.Admin.DeleteAccount(existingAccount);
+            }
            
+
             app.James.Remove(account);
             app.James.Add(account);
 

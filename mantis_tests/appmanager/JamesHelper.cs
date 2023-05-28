@@ -9,10 +9,7 @@ namespace mantis_tests
 {
     public class JamesHelper:HelperBase
     {
-        public JamesHelper(ApplicationManager manager) : base(manager)
-        {
-
-        }
+        public JamesHelper(ApplicationManager manager) : base(manager) { }
 
         public void Add(AccountData account)
         {
@@ -22,7 +19,8 @@ namespace mantis_tests
             }
             TelnetConnection telnet = LoginToJames();
             telnet.WriteLine("adduser " + account.Name + " " + account.Password);
-            Console.WriteLine(telnet.Read());
+            Console.Out.WriteLine(telnet.Read());
+            
         }
         public void Remove(AccountData account)
         {
@@ -32,7 +30,7 @@ namespace mantis_tests
             }
             TelnetConnection telnet = LoginToJames();
             telnet.WriteLine("deluser " + account.Name);
-            Console.WriteLine(telnet.Read());
+            Console.Out.WriteLine(telnet.Read());
         }
 
 
@@ -41,7 +39,7 @@ namespace mantis_tests
             TelnetConnection telnet = LoginToJames();
             telnet.WriteLine("verify " + account.Name);
             string info = telnet.Read();
-            Console.WriteLine(info);
+            Console.Out.WriteLine(info);
             return ! info.Contains("does not exist");
         }
 
@@ -49,11 +47,11 @@ namespace mantis_tests
         private TelnetConnection LoginToJames()
         {
             TelnetConnection telnet = new TelnetConnection("localhost", 4555);
-            Console.WriteLine(telnet.Read());// считываем то, что написал James ("Ввести логин")
+            Console.Out.WriteLine(telnet.Read()); // считываем то, что написал James ("Ввести логин")
             telnet.WriteLine("root");
-            Console.WriteLine(telnet.Read());// считываем то, что написал James ("Ввести password")
+            Console.Out.WriteLine(telnet.Read());// считываем то, что написал James ("Ввести password")
             telnet.WriteLine("root");
-            Console.WriteLine(telnet.Read());// считываем то, что написал James 
+            Console.Out.WriteLine(telnet.Read());// считываем то, что написал James 
             return telnet;
         }
     }

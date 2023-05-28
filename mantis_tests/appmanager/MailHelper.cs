@@ -9,10 +9,7 @@ namespace mantis_tests
 {
     public class MailHelper:HelperBase
     {
-        public MailHelper(ApplicationManager manager) : base(manager)
-        {
-
-        }
+        public MailHelper(ApplicationManager manager) : base(manager) { }
 
         public String GetLastMail(AccountData account)
         {
@@ -29,6 +26,7 @@ namespace mantis_tests
                     MailMessage massege = pop3.GetMessage(1);
                     string body = massege.Body;
                     pop3.DeleteMessage(1);
+                    pop3.LogOut();
                     return body;
                 }
                 else
